@@ -27,11 +27,43 @@ class ProductManagerTest {
     private Smartphone phone2 = new Smartphone(4, "P40 128Gb", 39990, "Huawei");
 
     @Test
-    void searchBy() {
+    void searchByBookName() {
         Product[] returned = new Product[]{book1, book2, phone1, phone2};
         doReturn(returned).when(repository).findAll();
         Product[] actual = manager.searchBy("The Hobbit, or There and Back Again");
         Product[] expected = new Product[]{book1};
+        assertArrayEquals(expected, actual);
+        verify(repository).findAll();
+    }
+
+    @Test
+    void searchByBookAuthor() {
+        Product[] returned = new Product[]{book1, book2, phone1, phone2};
+        doReturn(returned).when(repository).findAll();
+        Product[] actual = manager.searchBy("Jeff Marsden");
+        Product[] expected = new Product[]{book2};
+        assertArrayEquals(expected, actual);
+
+        verify(repository).findAll();
+    }
+
+    @Test
+    void searchBySmartphoneName() {
+        Product[] returned = new Product[]{book1, book2, phone1, phone2};
+        doReturn(returned).when(repository).findAll();
+        Product[] actual = manager.searchBy("Galaxy S20+");
+        Product[] expected = new Product[]{phone1};
+        assertArrayEquals(expected, actual);
+
+        verify(repository).findAll();
+    }
+
+    @Test
+    void searchBySmartphoneManufacturer() {
+        Product[] returned = new Product[]{book1, book2, phone1, phone2};
+        doReturn(returned).when(repository).findAll();
+        Product[] actual = manager.searchBy("Huawei");
+        Product[] expected = new Product[]{phone2};
         assertArrayEquals(expected, actual);
 
         verify(repository).findAll();

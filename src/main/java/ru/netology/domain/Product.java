@@ -50,18 +50,6 @@ public class Product {
                 Objects.equals(name, product.name);
     }
 
-    public boolean matches(Product product, String search) {
-        if (product instanceof Product) {
-            Product product1 = (Product) product;
-            if (product1.getName().equalsIgnoreCase(search)) {
-                return true;
-            }
-            return false;
-        } else {
-            return false;
-        }
-    }
-
     @Override
     public int hashCode() {
         return Objects.hash(id, name, price);
